@@ -25,6 +25,22 @@ function mumbleMore(p, w, m, s){
   }
   return spells[(w || p.split) ? 'e' : 'a'](mumbleMore)
 }
-console.log(
-  mumbleMore('hello')('my')('name')('is')('Arundhati')()
-)
+// console.log(
+//   mumbleMore('hello')('my')('name')('is')('Arundhati')()
+// )
+
+// ha ha, I am sure i typed it in right but I cant get it to work.
+function sayIt(word){
+  return s(word);
+  function s(word){
+    s.toString = function() { return k(word).join(' '); }
+    console.log(s)
+    return s
+  }
+  function k(word){
+    t = [word];
+    k = function(word) { return t.push(word);}
+  }
+}
+
+sayIt('hello')('my')('name')('is')('Arundhati')()
