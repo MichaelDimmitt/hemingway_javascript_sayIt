@@ -8,12 +8,11 @@ cd hemingway_javascript_sayIt; node sayItChallenge.js;
 
 // Simplified implementation of Slyvia Plath implementation.
 // Improvement still to be completed: 1) remove global words variable.
-words = '';
-function say_it(word) {
-  return  word ? (words+=` ${word}`, say_it) : words
-}
-// console.log( 
-//   say_it('hello')('my')('name')('is')('Arundhati')() 
+let words = ''
+const say_it = (...args) => args.length > 0 ? ( args.map(word => words+=` ${word}`), say_it) : words 
+const d = (x) => typeof x === 'string' ? x : x()
+// console.log(
+//   say_it('hello', 'bob')('my')('name')('is')('Arundhati')('have', 'a', 'nice', 'day')('jumbo', 'shrimp')()
 // )
 
 // Simplified version of JK Rowling implmentation.
@@ -46,7 +45,8 @@ function sayIt(word){
     k = function(word) { return t.push(word);}
   }
 }
-
-sayIt('hello')('my')('name')('is')('Arundhati')()
+// console.log(
+//   sayIt('hello')('my')('name')('is')('Arundhati')()
+// )
 
 ```

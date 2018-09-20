@@ -4,13 +4,22 @@
 
 // Simplified implementation of Slyvia Plath implementation.
 // Improvement still to be completed: 1) remove global words variable.
-words = '';
-function say_it(word) {
-  return  word ? (words+=` ${word}`, say_it) : words
-}
-// console.log( 
-//   say_it('hello')('my')('name')('is')('Arundhati')() 
-// )
+let words = ''
+const say_it = (...args) => args.length > 0 ? ( args.map(word => words+=` ${word}`), say_it) : words 
+const d = (x) => typeof x === 'string' ? x : x()
+
+console.log(`
+  the following commands work:
+  command: d(say_it('hello', 'bob')('my')('name')('is')('Arundhati')('have', 'a', 'nice', 'day')('jumbo', 'shrimp')())
+  output: ${d(say_it('hello', 'bob')('my')('name')('is')('Arundhati')('have', 'a', 'nice', 'day')('jumbo', 'shrimp')())},
+
+  command: d(say_it('hello', 'test')('my')('name')('is')('Arundhati'))
+  output: ${d(say_it('hello', 'test')('my')('name')('is')('Arundhati'))}
+
+  the following commands do not work:
+  command: d(say_it('hello', 'test')()('my')('name')('is')('Arundhati'))
+  output: error
+`)
 
 // Simplified version of JK Rowling implmentation.
 // How does this work, 😱 ; so cool. messing with function bindings and then calling the function?
@@ -43,4 +52,4 @@ function sayIt(word){
   }
 }
 
-sayIt('hello')('my')('name')('is')('Arundhati')()
+// sayIt('hello')('my')('name')('is')('Arundhati')()
