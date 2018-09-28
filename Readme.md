@@ -7,13 +7,17 @@ cd hemingway_javascript_sayIt; node sayItChallenge.js;
 // output expected: hello my name is Arundhati
 
 // Simplified implementation of Slyvia Plath implementation.
-// Improvement still to be completed: 1) remove global words variable.
-let words = ''
-const say_it = (...args) => args.length > 0 ? ( args.map(word => words+=` ${word}`), say_it) : words 
+const say_it = (...args) => {
+ return args.length > 0 ? say_two('', args) : ''
+}
+const say_two = (words, ...args) => {
+  return args.length > 0 ? ( args.map(word => words+=` ${word}`), say_two.bind(null, words) ) : words
+}
 const d = (x) => typeof x === 'string' ? x : x()
-// console.log(
-//   say_it('hello', 'bob')('my')('name')('is')('Arundhati')('have', 'a', 'nice', 'day')('jumbo', 'shrimp')()
-// )
+console.log(`
+  the following commands work:
+  command: d(say_it('hello')('my')('name')('is')('Arundhati')('have', 'a', 'nice', 'day')('jumbo', 'shrimp')())
+`)
 
 // Simplified version of JK Rowling implmentation.
 // How does this work, 😱 ; so cool. messing with function bindings and then calling the function?
