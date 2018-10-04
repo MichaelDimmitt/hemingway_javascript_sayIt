@@ -7,16 +7,12 @@ cd hemingway_javascript_sayIt; node sayItChallenge.js;
 // output expected: hello my name is Arundhati
 
 // Simplified implementation of Slyvia Plath implementation.
-const say_it = (...args) => {
- return args.length > 0 ? say_two('', args) : ''
+const say_it = (prev_length, ...args) => {
+  return prev_length !== args.length ? ( say_it.bind(null, args.length, ...args ) ) : args.join(' ')
 }
-const say_two = (words, ...args) => {
-  return args.length > 0 ? ( args.map(word => words+=` ${word}`), say_two.bind(null, words) ) : words
-}
-const d = (x) => typeof x === 'string' ? x : x()
+
 console.log(`
-  the following commands work:
-  command: d(say_it('hello')('my')('name')('is')('Arundhati')('have', 'a', 'nice', 'day')('jumbo', 'shrimp')())
+  ${say_it(0, 'hello')('my')('name')('is')('Arundhati')('have', 'a', 'nice', 'day')('jumbo', 'shrimp')()}
 `)
 
 // Simplified version of JK Rowling implmentation.
