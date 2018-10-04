@@ -3,7 +3,34 @@
 // output expected: hello my name is Arundhati
 
 // Simplified implementation of Slyvia Plath implementation.
-// Improvement still to be completed: 1) remove global words variable.
+const d = (x) => typeof x === 'string' ? x : x()
+
+const mapOverObject = (myObject) => (
+  Object.keys(myObject).map( (key, index) => d(myObject[key]) )
+)
+
+const say_it_shortened = (...args) => ( 
+  args.length > 0 ? _say_it_shortened(0, args) : '' 
+)
+
+const _say_it_shortened = (prev_length, ...args) => (
+  prev_length !== args.length
+    ? _say_it_shortened.bind(null, args.length, ...args ) 
+    : args.join(' ')
+)
+
+async function run_the_stuff(){
+  let inputs = {}
+  inputs['test'] = await say_it_shortened('hello')('my')('jumbo', 'shrimp')
+  inputs['food'] = await say_it_shortened('hello')('my')('jumbo', 'shrimp')()
+
+  console.log(
+    mapOverObject(inputs).join('\n')
+  )
+}
+run_the_stuff()
+
+// Improvement still to be completed:
 const say_it_shortened = (prev_length, ...args) => {
   return prev_length !== args.length ? ( say_it_shortened.bind(null, args.length, ...args ) ) : args.join(' ')
 }
