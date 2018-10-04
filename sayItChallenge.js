@@ -4,6 +4,14 @@
 
 // Simplified implementation of Slyvia Plath implementation.
 // Improvement still to be completed: 1) remove global words variable.
+const say_it_shortened = (prev_length, ...args) => {
+  return prev_length !== args.length ? ( say_it_shortened.bind(null, args.length, ...args ) ) : args.join(' ')
+}
+
+console.log(`
+  ${say_it_shortened(0, 'hello')('my')('name')('is')('Arundhati')('have', 'a', 'nice', 'day')('jumbo', 'shrimp')()}
+`)
+
 const say_it = (...args) => {
  return args.length > 0 ? say_two('', args) : ''
 }
