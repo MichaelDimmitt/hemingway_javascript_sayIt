@@ -29,13 +29,13 @@ async function run_the_stuff(){
 function micah_nested_partial_application_solution(){
 
   const say_it = (...args) =>
-    _say_it( (...arr) => arr.join(" "), ...args)
+    _say_it( (...arr) => arr, ...args)
 
   const _say_it = (fn, ...args) =>
     args.length === 0 ? fn() : _say_it.bind(null, fn.bind(null, ...args))
 
   const has_been_said = say_it("foo", "bar")("baz")("quz", "quo")()
-  console.log(has_been_said)
+  console.log(has_been_said.join(" "))
 
 }
 micah_nested_partial_application_solution()
