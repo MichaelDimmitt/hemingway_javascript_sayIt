@@ -10,7 +10,8 @@ const _say_it_shortened = (prev_length, ...args) => (
 )
 async function run_the_stuff(){
   let inputs = {}
-  inputs['food'] = await say_it_shortened('hello')('my')('jumbo', 'shrimp')()
+  inputs['anonymousTerminator'] = await say_it_shortened('hello')('my')('jumbo', 'shrimp')()
+  inputs['funcNeedsTerminator'] = await say_it_shortened('hello')('my')('jumbo', 'shrimp')
 
   console.log(
     inputs
