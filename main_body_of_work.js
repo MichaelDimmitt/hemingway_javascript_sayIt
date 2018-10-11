@@ -52,3 +52,23 @@ function try_to_make_it_better(){
   console.log(has_been_said.join(" "))
 
 }
+
+function micah_nested_partial_application_solution2(){
+
+  const fun = (...arr) => arr
+
+  const say_it = (fn, ...args) => {
+    return _say_it(fn, ...args)
+  }
+
+  const _say_it = (fn, ...args) => {
+
+    return ( args.length === 0 ) ? fn() : _say_it.bind(null, fn.bind(null, ...args))
+  }
+
+  const has_been_said = say_it(fun, "foo", "bar")("baz")("quz", "quo")()
+  console.log(
+    " has_been_said_first: ",has_been_said.join(" ")
+  )
+}
+micah_nested_partial_application_solution2()
