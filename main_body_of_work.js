@@ -40,18 +40,33 @@ function micah_nested_partial_application_solution1(){
 }
 // micah_nested_partial_application_solution1()
 
-function try_to_make_it_better(){
+class try_to_make_it_better {
+  constructor() {
 
-  const say_it = (...args) =>
-    _say_it( (...arr) => arr, ...args)
+  }
+  fun(...arr){ return arr }
+  
+  say_it(fn, ...args) {
+    return this._say_it(fn, fn, ...args)
+  }
 
-  const _say_it = (fn, ...args) =>
-    args.length === 0 ? fn() : _say_it.bind(null, fn.bind(null, ...args)) // ()=>_say_it( ()=>fn(...args) )
+  _say_it(fn, ...args) {
+   return args.length === 0 ? fn() : this._say_it.bind(this, fn.bind(this, ...args))
+      // ()=>this._say_it( ()=>this.fn(...args) )
+  }
 
-  const has_been_said = say_it("foo", "bar")("baz")("quz", "quo")()
-  console.log(has_been_said.join(" "))
+  //   // foo = () => this.foo()
+  //   // foo = (function(_this) { return _this.foo(); })(this)
+
+  //   // bar = () => baz();
+  //   // bar = function() { baz(); }
+
+  // const has_been_said = say_it("foo", "bar")("baz")("quz", "quo")()
+  // console.log(has_been_said.join(" "))
 
 }
+let test = new try_to_make_it_better()
+console.log('this ', test.say_it(test.fun, "foo", "bar")("baz")("quz", "quo")(), ' afterthis')
 
 function micah_nested_partial_application_solution2(){
 
