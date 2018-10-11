@@ -58,17 +58,21 @@ function micah_nested_partial_application_solution2(){
   const fun = (...arr) => arr
 
   const say_it = (fn, ...args) => {
-    return _say_it(fn, ...args)
+    return _say_it(fn, fn, ...args)
   }
 
   const _say_it = (fn, ...args) => {
+    const [first, ...rest] = args
+    const junkFreeArray = ( (fn == first) ? rest : args )
 
-    return ( args.length === 0 ) ? fn() : _say_it.bind(null, fn.bind(null, ...args))
+    return ( args.length === 0 ) ? fn() : _say_it.bind(null, fn.bind(null, ...junkFreeArray))
   }
 
   const has_been_said = say_it(fun, "foo", "bar")("baz")("quz", "quo")()
+  const has_been_said_again = say_it(fun)("foo", "bar")("baz")("quz", "quo")
   console.log(
-    " has_been_said_first: ",has_been_said.join(" ")
+    " has_been_said_first: ",has_been_said.join(" "),"\n",
+    "has_been_said_again: ",has_been_said_again().join(" ")
   )
 }
 micah_nested_partial_application_solution2()
