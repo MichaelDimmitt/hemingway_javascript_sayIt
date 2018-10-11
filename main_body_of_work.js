@@ -52,7 +52,8 @@ class try_to_make_it_better {
 
   _say_it(fn, ...args) {
    return args.length === 0 ? fn() : this._say_it.bind(this, fn.bind(this, ...args))
-      // ()=>this._say_it( ()=>this.fn(...args) )
+    // ()=>this._say_it(fn.bind(null, ...args))
+    // ()=>this._say_it( ()=>this.fn(...args) )
   }
 
   //   // foo = () => this.foo()
